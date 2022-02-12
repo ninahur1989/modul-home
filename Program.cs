@@ -3,6 +3,8 @@ bool r = true;
 string[] taskarray = new string[0];
 int[] statusInt = new int[0];
 DateTime[] time = new DateTime[0];
+bool programa = true;
+
 
 bool Check(string name)
 {
@@ -17,17 +19,17 @@ bool Check(string name)
     return false;
 }
 string task;
-string List()
+ void List()
 {
     foreach (string s in taskarray)
         Console.WriteLine(s);
     Console.WriteLine("write one of the tasks below Which you want to use");
     task = Console.ReadLine().ToLower();
-    return "d";
+   
 }
 
 
-while (true)
+while (programa)
 {
     DateTime date;
     Console.WriteLine("choise a comand ");
@@ -122,14 +124,30 @@ while (true)
             for (int i = 0; i < taskarray.Length; i++)
             {
                 if (statusInt[i] == 1 && taskarray[i] == task)
-                {
+                {   
+                    Console.WriteLine("Write time ");
+
+                    DateTime userdate;
+                   
 
 
-                    date = DateTime.Today;
-                    time[i] = date;
-                    i = taskarray.Length + 1;
+                    if (!DateTime.TryParse(Console.ReadLine(), out userdate))
+                    {
 
-                }
+
+                        date = DateTime.Now;
+
+                        time[i] = date;
+                        i = taskarray.Length + 1;
+                    }
+                    else
+                    {
+                        date = userdate;
+                        time[i] = date;
+                        i = taskarray.Length + 1;
+                    }
+                   
+                }   
 
             }
 
@@ -148,7 +166,7 @@ while (true)
                 {
                     if (statusInt[i] == 1)
                     {
-                        Console.WriteLine(taskarray[i] + " " + time[i]);
+                        Console.WriteLine(taskarray[i] + " " + time[i].ToString("f"));
                     }
                 }
                 Console.WriteLine("All of status 0");
@@ -160,34 +178,27 @@ while (true)
                     }
                 }
             }
-            
-            
-                
-            for (int i = 0; i < taskarray.Length; i++)
-            {
-                if (status == 1 && statusInt[i] == 1)
-                {
-                    Console.WriteLine(taskarray[i] + " " + time[i]);
 
-                }
-                else if (status == 0 && statusInt[i] == 0)
+
+            else
+            {
+                for (int i = 0; i < taskarray.Length; i++)
                 {
-                    Console.WriteLine(taskarray[i]);
+                    if (status == 1 && statusInt[i] == 1)
+                    {
+                        Console.WriteLine(taskarray[i] + " " + time[i].ToString("f"));
+
+                    }
+                    else if (status == 0 && statusInt[i] == 0)
+                    {
+                        Console.WriteLine(taskarray[i]);
+                    }
                 }
             }
 
             break;
+        case "exit":
+            programa = false;
+            break;
     }
 }
-
-
-
-
-
-//DateTime now = DateTime.Now;
-//Random random = new Random();
-//short tempruture = (short)random.Next(-30, 40);
-//Console.WriteLine("Введите команду какую хотите использовать : ");
-//string choise = Console.ReadLine();
-//DateTime thisDay = DateTime.Today;
-
